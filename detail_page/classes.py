@@ -27,9 +27,9 @@ class Purchase:
         payment = Payment(self.member.get_payment_method().get_account());
         return payment.pay(self.price)
 
-    def record_purchase:
+    def record_purchase():
         record = PaymentRecord(self.member, self.game_product)
-        return record
+        record.save()
 
 class Payment:
 
