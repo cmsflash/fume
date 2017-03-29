@@ -1,16 +1,5 @@
 from .models import PurchaseRecord
 
-class detail_page:
-
-    def __init__(self, member, game):
-        self.member = member
-        self.game = game
-
-    def start_purchase(platform):
-        game_product = self.game.get_game_product(platform)
-        purchase = Purchase(member, game_product)
-        return purchase
-
 class Purchase:
 
     def __init__(self, member, game_product):

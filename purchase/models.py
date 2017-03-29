@@ -1,8 +1,6 @@
 from django.db import models
-
-class Member(models.Model):
-
-class GameProduct(models.Model):
+from member.models import Member
+from games.models import GameProduct
 
 class PurchaseRecord(models.Model):
 
