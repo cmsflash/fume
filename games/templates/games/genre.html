@@ -1,0 +1,7 @@
+<h1 style="text-transform: capitalize;">{{ genre }}</h1>
+
+{% for game in games %}
+    <img src="{{ game.thumbnail.url }}" height="90" width="160">
+    <h2><a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
+    <h3>{{ game.description }}</h3>
+{% endfor %}

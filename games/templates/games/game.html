@@ -1,0 +1,12 @@
+{% load static %}
+
+<img src="{{ game.cover.url }}" height="450" width="800">
+<h1>{{ game.title }}</h1>
+<h3>{{ game.description }}</h3>
+<p>{{ game.detail|linebreaks }}</p>
+
+<ul>
+    {% for item in items %}
+        <li>{{ item.get_platform_display }} - ${{ item.price }}</li>
+    {% endfor %}
+</ul>
