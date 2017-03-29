@@ -1,6 +1,6 @@
 from .models import PaymentRecord
 
-class detail_page:
+class DetailPage:
 
     def __init__(self, member, game):
         self.member = member
