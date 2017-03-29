@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from .models import Game, Member
+from .classes import DetailPage
 
 default_member = Member('Qomo Inc', 'samson', 'Qomo', 'we@qomo.com')
 

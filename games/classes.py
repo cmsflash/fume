@@ -1,4 +1,4 @@
-from .models import PaymentRecord
+from .models import PurchaseRecord
 
 class DetailPage:
 
@@ -28,7 +28,7 @@ class Purchase:
         return payment.pay(self.price)
 
     def record_purchase():
-        record = PaymentRecord(self.member, self.game_product)
+        record = PurchaseRecord(self.member, self.game_product)
         record.save()
 
 class Payment:

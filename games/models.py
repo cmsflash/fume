@@ -24,11 +24,14 @@ class Game(models.Model):
     thumbnail = models.ImageField(upload_to='images/thumbnails')
     cover = models.ImageField(upload_to='images/covers')
 
+    def get_game_products(self):
+        return GameProduct.objects.filter(game=self)
+
     def __str__(self):
         return self.title
 
 
-class Item(models.Model):
+class GameProduct(models.Model):
     LINUX = 'L'
     MACOS = 'M'
     WINDOWS = 'W'
@@ -48,17 +51,40 @@ class Item(models.Model):
         unique_together = ["game", "platform"]
 
 class Member(models.Model):
-    pass
 
-class GameProduct(models.Model):
-    pass
+    def __init__(self, username, password, nickname, email):
+        pass
 
 class PurchaseRecord(models.Model):
 
     member = models.ForeignKey(Member, on_delete = models.CASCADE)
-    game_object = models.ForeignKey(GameProduct, on_delete = models.CASCADE)
+    game_product = models.ForeignKey(GameProduct, on_delete = models.CASCADE)
 
     def __init__(self, member, game_product):
         self.member = member
-        self.game_object = game_product
+        self.game_product = game_product
 
+class Tag(models.Model):
+
+    text = models.CharField(max_length = 30)
+
+    def __init__(self, text):
+        self.text = text
+
+    def get_games(self):
+        tag_items = TagItem.objects.filter(tag=self)
+        games = set()
+        for tag_item in tag_items:
+            games.add(tag_item.game)
+        return list(games)
+
+class TagItem(models.Model):
+    
+    member = models.ForeignKey(Member, on_delete = models.CASCADE)
+    game = models.ForeignKey(GameProduct, on_delete = models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete = models.CASCADE)
+
+    def __init__(self, member, game, tag):
+        self.member = member
+        self.game = game
+        self.tag = tag
