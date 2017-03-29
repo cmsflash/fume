@@ -1,9 +1,13 @@
 from django.shortcuts import render
 
-from .models import Game
+from .models import Game, Member
+from .classes import DetailPage
+
+default_member = Member('Qomo Inc', 'samson', 'Qomo', 'we@qomo.com')
 
 def game(request, gameID):
 	game = Game.objects.get(pk=gameID)
+	detail_page = DetailPage(default_member, game)
 	items = game.items.all()
 	context = {'game': game, 'items': items}
 	return render(request, 'games/game.html', context)
