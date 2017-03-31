@@ -1,6 +1,14 @@
 from django.db import models
 from datetime import date
 
+
+class PaymentMethod(models.Model):
+
+    account_number = models.IntegerField()
+
+    def __init__(self, account_number):
+        self.account_number = account_number
+
 class Member(models.Model):
         
     username = models.CharField(max_length=50)
@@ -20,14 +28,14 @@ class Member(models.Model):
     def get_rewards(self):
         rewards = Reward.objects.filter(member=self)
         for reward in rewards:
-            if reward.expiration_date < date.today()
+            if reward.expiration_date < date.today():
                 Reward.objects.get(expiration_date=reward.expiration_date, member=self).delete()
         return len(rewards)
 
     def use_rewards(number):
         rewards = Reward.objects.filter(member=self)
         for reward in rewards:
-            if reward.expiration_date < date.today()
+            if reward.expiration_date < date.today():
                 Reward.objects.get(expiration_date=reward.expiration_date, member=self).delete()
         sort(rewards, key=lambda reward: reward.expiration_date)
         for reward in rewards[0:number]:
@@ -38,16 +46,6 @@ class Member(models.Model):
         if total_amount>100:
             new_reward = Reward(date.today())
             new_reward.save()
-
-
-
-        
-class PaymentMethod(models.Model):
-
-    account_number = models.IntegerField()
-
-    def __init__(self, account_number):
-        self.account_number = account_number
 
 class Reward(models.Model):
     expiration_date = models.DateTimeField()

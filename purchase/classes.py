@@ -22,8 +22,8 @@ class Purchase:
 
 class Payment:
 
-    def __init__(self, account):
-        self.account = account
+    def __init__(self, payment_method):
+        self.payment_method = payment_method
 
     def pay(amount):
         return True

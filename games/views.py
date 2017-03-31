@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from .models import Game
 
@@ -17,3 +18,9 @@ def genre(request, genre):
 	games = Game.objects.filter(genre=genre[:2].upper())
 	context = {'genre': genre, 'games': games}
 	return render(request, 'games/genre.html', context)
+
+def tag(request, gameID):
+        return HttpResponse("Tags of game #" + gameID)
+
+def add_tag(request, gameID):
+        return HttpResponse("Adding tags to game #" + gameID)

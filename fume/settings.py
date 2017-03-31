@@ -31,8 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'fume.apps.FumeConfig',
-    'games.apps.GamesConfig',
+    'fume',
+    'games',
+    'member',
+    'purchase',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

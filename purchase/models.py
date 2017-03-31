@@ -5,7 +5,7 @@ from games.models import GameProduct
 class PurchaseRecord(models.Model):
 
     member = models.ForeignKey(Member, on_delete = models.CASCADE)
-    game_object = models.ForeighnKey(GameProduct, on_delete = models.CASCADE)
+    game_object = models.ForeignKey(GameProduct, on_delete = models.CASCADE)
 
     def __init__(self, member, game_product):
         self.member = member

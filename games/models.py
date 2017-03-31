@@ -41,6 +41,9 @@ class Item(models.Model):
 	game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='items')
 	price = models.DecimalField(max_digits=5, decimal_places=2)
 
+	def get_price(self):
+                return self.price
+
 	def __str__(self):
 		return self.game.title + ' - ' + self.get_platform_display()
 
