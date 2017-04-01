@@ -7,6 +7,6 @@
 
 <ul>
     {% for item in items %}
-        <li>{{ item.get_platform_display }} - ${{ item.price }} : ${{ item.pk }}</li>
+        <li><a href= "{% url 'purchase:purchase' item.pk %}">{{ item.get_platform_display }} - ${{ item.price }}</a></li>
     {% endfor %}
 </ul>

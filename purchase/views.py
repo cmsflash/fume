@@ -9,4 +9,5 @@ def purchase(request, game_product_id):
     game_product = Item.objects.get(pk=game_product_id)
     member = 0
     purchase = Purchase(member, game_product)
-    return HttpResponse("Buying game product #" + str(game_product))
+    context = {'game_product_id': game_product_id}
+    return HttpResponse("Buying game product " + str(game_product))
