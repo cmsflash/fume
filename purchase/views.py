@@ -26,7 +26,7 @@ def pay(request, game_product_id):
     if successful:
         member.use_rewards(rewards_to_use)
         member.accumulate_spending(amount)
-        #purchase_record = PurchaseRecord.create(member, game_product)
-        #purchase_re
+        purchase_record = PurchaseRecord.create(member, game_product)
+        purchase_record.save()
     context = {'successful':successful, 'amount':round(amount, 2), 'game_product':str(game_product), 'game':game_product.game.pk}
     return render(request, 'purchase/pay.html', context)

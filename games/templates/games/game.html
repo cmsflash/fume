@@ -6,7 +6,11 @@
 <p>{{ game.detail|linebreaks }}</p>
 
 <ul>
-    {% for item in items %}
-        <li><a href= "{% url 'purchase:purchase' item.pk %}">{{ item.get_platform_display }} - ${{ item.price }}</a></li>
+    {% for record in records %}
+		{% if not record.0 %}
+			<li><a href= "{% url 'purchase:purchase' record.1.pk %}">{{ record.1.get_platform_display }} - ${{ record.1.price }}</a></li>
+		{% else %}
+			<li>Download</li>
+		{% endif %}
     {% endfor %}
 </ul>

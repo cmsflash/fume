@@ -6,7 +6,6 @@ class PurchaseRecord(models.Model):
 
     member = models.ForeignKey(Member, on_delete = models.CASCADE)
     item = models.ForeignKey(Item, on_delete = models.CASCADE)
-    item = Item.objects.get(pk=1)
     
     @classmethod
     def create(cls, member, item):
