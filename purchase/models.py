@@ -4,8 +4,8 @@ from games.models import Item
 
 class PurchaseRecord(models.Model):
 
-    member = models.ForeignKey(Member, on_delete = models.CASCADE)
-    item = models.ForeignKey(Item, on_delete = models.CASCADE)
+    member = models.ForeignKey(Member, on_delete = models.CASCADE, related_name='purchase_records')
+    item = models.ForeignKey(Item, on_delete = models.CASCADE, related_name='purchase_records')
     
     @classmethod
     def create(cls, member, item):
