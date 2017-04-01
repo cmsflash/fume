@@ -49,6 +49,3 @@ class Item(models.Model):
 
 	class Meta:
 		unique_together = ["game", "platform"]
-
-class GameProduct(Item):
-        pass

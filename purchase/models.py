@@ -5,8 +5,9 @@ from games.models import Item
 class PurchaseRecord(models.Model):
 
     member = models.ForeignKey(Member, on_delete = models.CASCADE)
-    game_object = models.ForeignKey(Item, on_delete = models.CASCADE)
-
+    item = models.ForeignKey(Item, on_delete = models.CASCADE)
+    item = Item.objects.get(pk=1)
+    
     @classmethod
-    def create(cls, member, game_product):
-        return cls(member=member, game_product=game_product)
+    def create(cls, member, item):
+        return cls(member=member, item=item)
