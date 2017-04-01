@@ -1,0 +1,9 @@
+<p>Hello, {{ member }}</p>
+<p>Buying game product {{ game_product }}</p>
+<form action="{% url 'purchase:pay' game_product_id rewards_to_use %}">
+  Use 
+  <input type="number" name="rewards_to_use" value="{{ reward_count }}" min="0" max="{{ reward_count }}">
+  reward(s) out of {{ reward_count }}
+  <br>
+  <input type="submit" value="Buy">
+</form> 

@@ -1,14 +1,6 @@
 from django.db import models
 from datetime import date
 
-
-class PaymentMethod(models.Model):
-
-    account_number = models.IntegerField()
-
-    def __init__(self, account_number):
-        self.account_number = account_number
-
 class Member(models.Model):
         
     username = models.CharField(max_length=50)
@@ -16,14 +8,18 @@ class Member(models.Model):
     nickname = models.CharField(max_length=30)
     email = models.CharField(max_length=100)
     total_amount = models.IntegerField()
-    paymentMethod = models.ForeignKey(PaymentMethod, on_delete = models.CASCADE)
 
-    def __init__(self, username, password, nickname, email):
+    @classmethod
+    def create(cls, username, password, nickname, email, payment_method):
+        member = cls(username=username, password=password, nickname=nickname, email=email, total_amount=0, paymentMethod = payment_method)
+        return member
+
+    '''def __init__(self, username, password, nickname, email):
         self.username = username
         self.password = password
         self.nickname = nickname
         self.email = email
-        self.total_amount = 0
+        self.total_amount = 0'''
         
     def get_rewards(self):
         rewards = Reward.objects.filter(member=self)
@@ -46,6 +42,15 @@ class Member(models.Model):
         if total_amount>100:
             new_reward = Reward(date.today())
             new_reward.save()
+
+class PaymentMethod(models.Model):
+
+    account_number = models.IntegerField()
+    member = models.OneToOneField(Member, on_delete = models.CASCADE)
+
+    @classmethod
+    def create(cls, account_number, member):
+        return cls(account_number=account_number, member=member)
 
 class Reward(models.Model):
     expiration_date = models.DateTimeField()
