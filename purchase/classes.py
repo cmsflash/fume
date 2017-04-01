@@ -17,7 +17,7 @@ class Purchase:
         return payment.pay(self.price)
 
     def record_purchase():
-        record = PurchaseRecord(self.member, self.game_product)
+        record = PurchaseRecord.create(self.member, self.game_product)
         record.save()
 
 class Payment:
@@ -25,5 +25,5 @@ class Payment:
     def __init__(self, payment_method):
         self.payment_method = payment_method
 
-    def pay(amount):
+    def pay(self, amount):
         return True

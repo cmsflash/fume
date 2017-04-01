@@ -1,0 +1,7 @@
+{% if successful %}
+	<p>Successfully paid ${{ amount }} for {{ game_product }}.</p>
+	<p><a href="{% url 'games:game' game %}">OK</a></p>
+{% else %}
+	<p>Payment failed</p>
+	<p><a href="{% url 'games:game' game %}">Return to game page</a></p>
+{% endif %}
