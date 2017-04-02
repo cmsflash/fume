@@ -22,6 +22,7 @@ def game(request, gameID):
     tags = set()
     for tag_item in tag_items:
         tags.add(tag_item.tag)
+    tags = reversed(list(tags))
     context = {'game': game, 'records': records, 'bought':bought_any, 'tags':tags}
     return render(request, 'games/game.html', context)
 
