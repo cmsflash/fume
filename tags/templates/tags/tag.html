@@ -1,0 +1,15 @@
+<p>Hello, {{ member }}</p>
+<p>Tagging game {{ game }}</p>
+<form action="{% url 'tags:add' game.pk %}">
+	Add tag:
+	<br>  
+	<input type="text" name="tag">
+	<br>
+	<input type="submit" value="Add">
+</form>
+<ul>
+	{% for tag in tags %}
+		<li>{{ tag.label }}</li>
+	{% endfor %}
+</ul>
+	

@@ -15,4 +15,17 @@
     {% endfor %}
 </ul>
 
-<p><a href= "{% url 'purchase:clear' game.pk %}">Clear purchase</a></p>
+{% if bought %}
+	<p><a href= "{% url 'purchase:clear' game.pk %}">Clear purchase</a></p>
+{% endif %}
+
+<h3>Tags
+	{% if bought %}
+		<a href="{% url 'tags:tag' game.pk %}">add</a>
+	{% endif %}
+</h3>
+<ul>
+	{% for tag in tags %}
+		<li>{{ tag.label }}</li>
+	{% endfor %}
+</ul>

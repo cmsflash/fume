@@ -10,17 +10,19 @@ def game(request, gameID):
     member = Member.objects.get(pk=1)
     items = game.items.all()
     bought = []
+    bought_any = False
     for item in items:
         if PurchaseRecord.objects.filter(member=member, item=item):
             bought.append(True)
+            bought_any = True
         else:
             bought.append(False)
     records = zip(bought, items)
-    context = {'game': game, 'records': records}
-    response = ''
-    for item in items:
-        response += str(len(PurchaseRecord.objects.filter(member=member, item=item))) + ' '
-    #return HttpResponse(response)
+    tag_items = game.tag_items.all()
+    tags = set()
+    for tag_item in tag_items:
+        tags.add(tag_item.tag)
+    context = {'game': game, 'records': records, 'bought':bought_any, 'tags':tags}
     return render(request, 'games/game.html', context)
 
 def genres(request):
