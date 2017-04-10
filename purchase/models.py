@@ -5,7 +5,7 @@ from datetime import datetime
 
 class PurchaseManager(models.Manager):
 
-    def purchase_records_of(member):
+    def get_purchase_records_of(member):
         return list(self.filter(member=member).order_by('-date_time'))
 
 class PurchaseRecord(models.Model):
