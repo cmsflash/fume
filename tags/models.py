@@ -4,16 +4,20 @@ from games.models import Game
 
 class TagManager(models.Manager):
 
-    def get_tags_of_game(game):
+    def get_tags_of_game(self, game, order='Arbitrary'):
         tag_items = TagItem.objects.filter(game=game)
         tags = set()
         for tag_item in tag_items:
             tags.add(tag_item.tag)
-        return list(tags)
+        tags = list(tags)
+        if (order == 'Lexicographical'):
+            tags.sort(key=lambda tag: tag.label)
+        return tags
 
 class Tag(models.Model):
 
     label = models.TextField(max_length=100)
+    objects = TagManager()
 
     @classmethod
     def create(cls, label):

@@ -1,1 +1,8 @@
 <h1><a href="/games/genres/">Genres</a></h1>
+
+<h1>Recommendations</h1>
+<ul>
+{% for recommendation in recommendations %}
+	<li> {{ recommendation.title }} </li>
+{% endfor %}
+</ul>

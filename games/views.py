@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from purchase.models import PurchaseRecord
 from member.models import Member
-
+from tags.models import Tag
 from .models import Game
 
 def game(request, gameID):
@@ -18,10 +18,7 @@ def game(request, gameID):
         else:
             bought.append(False)
     records = zip(bought, items)
-    tag_items = game.tag_items.all()
-    tags = set()
-    for tag_item in tag_items:
-        tags.add(tag_item.tag)
+    tags = Tag.objects.get_tags_of_game(game)
     tags = reversed(list(tags))
     context = {'game': game, 'records': records, 'bought':bought_any, 'tags':tags}
     return render(request, 'games/game.html', context)
