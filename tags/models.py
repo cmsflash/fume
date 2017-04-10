@@ -2,6 +2,15 @@ from django.db import models
 from member.models import Member
 from games.models import Game
 
+class TagManager(models.Manager):
+
+    def get_tags_of_game(game):
+        tag_items = TagItem.objects.filter(game=game)
+        tags = set()
+        for tag_item in tag_items:
+            tags.add(tag_item.tag)
+        return list(tags)
+
 class Tag(models.Model):
 
     label = models.TextField(max_length=100)
