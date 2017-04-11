@@ -1,3 +1,11 @@
+{% if user.is_authenticated %}
+    <h1>Hi, {{ user.member.nickname }}</h1>
+    <h1><a href="/member/logout/">Log Out</a></h1>
+{% else %}
+    <h1><a href="/member/signup/">Sign Up</a></h1>
+    <h1><a href="/member/login/">Log In</a></h1>
+{% endif %}
+
 <h1><a href="/games/genres/">Genres</a></h1>
 
 <h1>Recommendations</h1>

@@ -5,12 +5,12 @@ import datetime
 class Member(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	nickname = models.CharField(max_length=100)
-	avatar = models.ImageField(upload_to='images/avatars', default='default.jpg')
+	avatar = models.ImageField(upload_to='images/avatars', default='images/avatars/default.jpg')
 	accumulating_spending = models.IntegerField(default=0)
 
 	@classmethod
 	def create(cls, user, nickname):
-		return cls(user=user, nickname=nickname)
+		return cls.objects.create(user=user, nickname=nickname)
 
 	def get_number_of_rewards(self):
 		return self.rewards.filter(expiration_date__gte=datetime.datetime.now()).count()
@@ -37,7 +37,7 @@ class PaymentMethod(models.Model):
 
 	@classmethod
 	def create(cls, account_number, member):
-		return cls(account_number=account_number, member=member)
+		return cls.objects.create(account_number=account_number, member=member)
 
 class Reward(models.Model):
 
@@ -47,4 +47,4 @@ class Reward(models.Model):
 	member = models.ForeignKey(Member, on_delete = models.CASCADE, related_name='rewards')
 	@classmethod
 	def create(cls, member, date):
-		return cls(member=member, expiration_date=date)
+		return cls.objects.create(member=member, expiration_date=date)

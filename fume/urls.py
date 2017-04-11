@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^tags/', include('tags.urls', namespace='tags')),
     url(r'^games/', include('games.urls', namespace='games')),
     url(r'^purchase/', include('purchase.urls', namespace='purchase')),
+    url(r'^member/', include('member.urls', namespace='member')),
 ]
 
 if settings.DEBUG is True:
