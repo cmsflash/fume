@@ -1,58 +1,50 @@
 from django.db import models
-from datetime import date
+from django.contrib.auth.models import User
+import datetime
 
 class Member(models.Model):
-        
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=30)
-    nickname = models.CharField(max_length=30)
-    email = models.CharField(max_length=100)
-    total_amount = models.FloatField()
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	nickname = models.CharField(max_length=100)
+	avatar = models.ImageField(upload_to='images/avatars', default='default.jpg')
+	accumulating_spending = models.IntegerField(default=0)
 
-    @classmethod
-    def create(cls, username, password, nickname, email, payment_method):
-        member = cls(username=username, password=password, nickname=nickname, email=email, total_amount=0, paymentMethod = payment_method)
-        return member
-        
-    def get_rewards(self):
-        rewards = Reward.objects.filter(member=self)
-        for reward in rewards:
-            if reward.expiration_date < date.today():
-                Reward.objects.get(expiration_date=reward.expiration_date, member=self).delete()
-        return len(rewards)
+	@classmethod
+	def create(cls, user, nickname):
+		return cls(user=user, nickname=nickname)
 
-    def use_rewards(self, number):
-        rewards = self.rewards.all()
-        for reward in rewards:
-            if reward.expiration_date < date.today():
-                reward.delete()
-        used_rewards = rewards.order_by('expiration_date')[:number]
-        for reward in used_rewards:
-            reward.delete()
-    
-    def accumulate_spending(self, amount):
-        self.total_amount += amount
-        while self.total_amount > Reward.THRESHOLD:
-            new_reward = Reward.create(self, date.today())
-            new_reward.save()
-            self.total_amount -= Reward.THRESHOLD
-        self.save()
+	def get_number_of_rewards(self):
+		return self.rewards.filter(expiration_date__gte=datetime.datetime.now()).count()
+
+	def get_rewards(self):
+		return self.rewards.filter(expiration_date__gte=datetime.datetime.now()).order_by('expiration_date')
+
+	def use_rewards(self, number):
+		self.rewards.filter(expiration_date__lt=datetime.datetime.now()).delete()
+		self.rewards.filter(expiration_date__gte=datetime.datetime.now()).order_by('expiration_date')[:number].delete()
+
+	def accumulate_spending(self, amount):
+		self.accumulate_spending += amount
+		if self.accumulating_spending >= Reward.THRESHOLD:
+			Reward.create(member=self, date=datetime.datetime.now() + datetime.timedelta(days=120))
+			self.accumulating_spending -= Reward.THRESHOLD
+
+	def get_purchase_history(self):
+		return self.purchase_records
 
 class PaymentMethod(models.Model):
+	account_number = models.IntegerField()
+	member = models.OneToOneField(Member, on_delete = models.CASCADE, related_name='payment_method')
 
-    account_number = models.IntegerField()
-    member = models.OneToOneField(Member, on_delete = models.CASCADE, related_name='payment_method')
-
-    @classmethod
-    def create(cls, account_number, member):
-        return cls(account_number=account_number, member=member)
+	@classmethod
+	def create(cls, account_number, member):
+		return cls(account_number=account_number, member=member)
 
 class Reward(models.Model):
 
-    THRESHOLD = 100
-    
-    expiration_date = models.DateField()
-    member = models.ForeignKey(Member, on_delete = models.CASCADE, related_name='rewards')
-    @classmethod
-    def create(cls, member, date):
-        return cls(expiration_date = date, member=member)
+	THRESHOLD = 100
+
+	expiration_date = models.DateTimeField()
+	member = models.ForeignKey(Member, on_delete = models.CASCADE, related_name='rewards')
+	@classmethod
+	def create(cls, member, date):
+		return cls(member=member, expiration_date=date)
