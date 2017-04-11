@@ -1,3 +1,4 @@
+
 <h1>Sign Up</h1>
 
 <form method="post">
@@ -5,3 +6,6 @@
     {{ form.as_p }}
     <input type="submit" value="Sign Up"/>
 </form>
+<br>
+<p><strong>-- OR --</strong></p>
+<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
