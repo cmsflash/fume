@@ -6,7 +6,7 @@ class Member(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	nickname = models.CharField(max_length=100)
 	avatar = models.ImageField(upload_to='images/avatars', default='images/avatars/default.jpg')
-	accumulating_spending = models.IntegerField(default=0)
+	accumulated_spending = models.IntegerField(default=0)
 
 	@classmethod
 	def create(cls, user, nickname):
@@ -23,10 +23,10 @@ class Member(models.Model):
 		self.rewards.filter(expiration_date__gte=datetime.datetime.now()).order_by('expiration_date')[:number].delete()
 
 	def accumulate_spending(self, amount):
-		self.accumulate_spending += amount
-		if self.accumulating_spending >= Reward.THRESHOLD:
+		self.accumulated_spending += amount
+		if self.accumulated_spending >= Reward.THRESHOLD:
 			Reward.create(member=self, date=datetime.datetime.now() + datetime.timedelta(days=120))
-			self.accumulating_spending -= Reward.THRESHOLD
+			self.accumulated_spending -= Reward.THRESHOLD
 
 	def get_purchase_history(self):
 		return self.purchase_records
