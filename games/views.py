@@ -7,7 +7,9 @@ from .models import Game
 
 def game(request, gameID):
     game = Game.objects.get(pk=gameID)
-    member = Member.objects.get(pk=1)
+    if not request.user.is_authenticated():
+        return HttpResponse('Please log in or sign up first')
+    member = request.user.member
     items = game.items.all()
     bought = []
     bought_any = False
