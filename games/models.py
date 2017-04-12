@@ -42,7 +42,7 @@ class Item(models.Model):
 	price = models.DecimalField(max_digits=5, decimal_places=2)
 
 	def get_price(self):
-                return self.price
+		return self.price
 
 	def __str__(self):
 		return self.game.title + ' - ' + self.get_platform_display()

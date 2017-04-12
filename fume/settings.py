@@ -143,8 +143,8 @@ if DEBUG:
     DEFAULT_FROM_EMAIL = 'noreply@fume.com'
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
 )
 
 SOCIAL_AUTH_PIPELINE = (
