@@ -3,6 +3,9 @@ from member.models import Member
 from recommendation.classes import Recommender
 
 def index(request):
-    member = Member.objects.get(pk=1)
-    context = {'recommendations':Recommender.make_recommendations(member)}
+    if request.user.is_authenticated():
+        member = request.user.member
+        context = {'authenticated':True, 'recommendations':Recommender.make_recommendations(member)}
+    else:
+        context = {'authenticated':False}
     return render(request, 'fume/index.html', context)
