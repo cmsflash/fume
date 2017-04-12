@@ -15,9 +15,11 @@ def signup(request):
 		if form.is_valid():
 			User.objects.create_user(username=form.cleaned_data['username'], email=form.cleaned_data['email'], password=form.cleaned_data['password'])
 			user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-			login(request, user, backend=ModelBackend)
-			member = Member.create(user=user, nickname=form.cleaned_data['nickname'])
-			PaymentMethod.create(account_number=user.id, member=member)
-			return HttpResponseRedirect('/')
+			if user:
+				login(request, user)
+				member = Member.create(user=user, nickname=form.cleaned_data['nickname'])
+				PaymentMethod.create(account_number=user.id, member=member)
+				return HttpResponseRedirect('/')
+			return render(request, 'member/signup.html', {'form': form})
 		else:
 			return render(request, 'member/signup.html', {'form': form})
