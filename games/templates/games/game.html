@@ -1,31 +1,65 @@
 {% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="//cdn.muicss.com/mui-0.9.15/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="{% static "game.css" %}" rel = "stylesheet" type = "text/css"/>
+    <script src="//cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
+	  </head>
+	  <body>
 
-<img src="{{ game.cover.url }}" height="450" width="800">
-<h1>{{ game.title }}</h1>
-<h3>{{ game.description }}</h3>
-<p>{{ game.detail|linebreaks }}</p>
+	<div class="mui-container">
+		<div class = "mui-panel">
+			<!-- reserved for displaying userInfo -->
+		</div>
+		<div  class = "mui-panel">
 
-<ul>
-    {% for record in records %}
-		{% if not record.0 %}
-			<li><a href= "{% url 'purchase:purchase' record.1.pk %}">{{ record.1.get_platform_display }} - ${{ record.1.price }}</a></li>
-		{% else %}
-			<li>Download</li>
-		{% endif %}
-    {% endfor %}
-</ul>
+			<h1>{{ game.title }}</h1>
+			<img style = "float:left" src="{{ game.cover.url }}" height="450" width="800">
 
-{% if bought %}
-	<p><a href= "{% url 'purchase:clear' game.pk %}">Clear purchase</a></p>
-{% endif %}
+			<div class = "purchaseDiv">
+				<ul >
+				    {% for record in records %}
+						{% if not record.0 %}
+							<li class = "purchaseLi"><a class="purchaseButton mui-btn mui-btn--primary mui-btn--raised" href= "{% url 'purchase:purchase' record.1.pk %}">{{ record.1.get_platform_display }} - ${{ record.1.price }}</a></li>
+						{% else %}
+							<li class="mui-btn mui-btn--primary mui-btn--raised" >Download</li>
+						{% endif %}
+				    {% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class = "mui-panel">
+			<h3>Tags
+				{% if bought %}
+					<a class="mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:tag' game.pk %}">add</a>
+				{% endif %}
+			</h3>
+			<ul>
+				{% for tag in tags %}
+					<li class = "mui-btn mui-btn--primary mui-btn--raised tagli">{{ tag.label }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class = "mui-panel">
+			<h3>{{ game.description }}</h3>
+			<p>{{ game.detail|linebreaks }}</p>
+		</div>
 
-<h3>Tags
-	{% if bought %}
-		<a href="{% url 'tags:tag' game.pk %}">add</a>
-	{% endif %}
-</h3>
-<ul>
-	{% for tag in tags %}
-		<li>{{ tag.label }}</li>
-	{% endfor %}
-</ul>
+		<div class = "mui-panel">
+			<!--reserved for reviews-->
+		</div>
+			
+
+			{% if bought %}
+				<p><a class="mui-btn mui-btn--primary mui-btn--raised" href= "{% url 'purchase:clear' game.pk %}">Clear purchase</a></p>
+			{% endif %}
+
+		</div>
+	</div>
+  </body>
+</html>

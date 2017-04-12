@@ -1,0 +1,13 @@
+.tagli	{display: inline}
+.purchaseDiv{padding:;}
+.purchaseLi{display:inline;
+			display:block;
+			margin:0 auto;
+			text-align: center;
+			width:100;}
+.purchaseButton{
+	text-align: center;
+}
+.gameImg{
+	float:left;
+}
