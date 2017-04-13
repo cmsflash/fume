@@ -20,17 +20,18 @@ def purchase(request, game_product_id):
 def pay(request, game_product_id):
     rewards_to_use = int(request.GET.get('rewards_to_use'))
     item = Item.objects.get(pk=game_product_id)
-    member = Member.objects.get(pk=1)
+    if not request.user.is_authenticated():
+        return HttpResponse('Please log in or sign up first')
+    member = request.user.member
     payment_method = member.payment_method
     payment = Payment(payment_method)
     amount = float(item.price) * (1 - 0.1 * int(rewards_to_use))
     successful = payment.pay(amount)
     if successful:
-        #member.use_rewards(rewards_to_use)
+        member.use_rewards(rewards_to_use)
         member.accumulate_spending(amount)
         purchase_record = PurchaseRecord.create(member, item, datetime.now())
         purchase_record.save()
-        pass
     context = {'successful':successful, 'amount':round(amount, 2), 'game_product':str(item), 'game':item.game.pk}
     return render(request, 'purchase/pay.html', context)
 
