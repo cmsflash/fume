@@ -4,12 +4,14 @@ from purchase.models import PurchaseRecord
 from member.models import Member
 from tags.models import Tag
 from .models import Game
+from reviews.models import Review
 
 def game(request, gameID):
     game = Game.objects.get(pk=gameID)
     if not request.user.is_authenticated():
         return HttpResponse('Please log in or sign up first')
     member = request.user.member
+    #member = Member.objects.get(pk=1)
     items = game.items.all()
     bought = []
     bought_any = False
@@ -22,7 +24,8 @@ def game(request, gameID):
     records = zip(bought, items)
     tags = Tag.objects.get_tags_of_game(game)
     tags = reversed(list(tags))
-    context = {'game': game, 'records': records, 'bought':bought_any, 'tags':tags}
+    reviews = Review.objects.get_reviews_of_game(game)
+    context = {'game': game, 'records': records, 'bought':bought_any, 'tags':tags, 'reviews':reviews}
     return render(request, 'games/game.html', context)
 
 def genres(request):

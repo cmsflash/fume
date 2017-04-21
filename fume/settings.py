@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'member',
     'purchase',
     'tags',
+    'reviews',
 	'social_django',
     'django.contrib.admin',
     'django.contrib.auth',

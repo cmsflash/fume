@@ -52,6 +52,23 @@
 
 		<div class = "mui-panel">
 			<!--reserved for reviews-->
+			<h3>Reviews</h3>
+			{% if bought %}
+				<form action="{% url 'reviews:add' game.pk %}">
+					Write review:
+					<br>  
+					<input type="text" name="content">
+					<br>
+					<input type="submit" value="Add">
+				</form>
+			{% endif %}
+			<ul>
+				{% for review in reviews %}
+					<li>{{review.reviewer.nickname}}:{{review.content}}</li>
+				{%endfor%}
+			</ul>
+
+
 		</div>
 			
 
