@@ -6,7 +6,7 @@ class Member(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='member')
 	nickname = models.CharField(max_length=100)
 	avatar = models.ImageField(upload_to='images/avatars', default='images/avatars/default.jpg')
-	accumulated_spending = models.IntegerField(default=0)
+	accumulated_spending = models.IntegerField(default=28)
 
 	@classmethod
 	def create(cls, user, nickname):

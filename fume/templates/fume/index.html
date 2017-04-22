@@ -1,10 +1,23 @@
 {% if user.is_authenticated %}
-    <h1>Hi, {{ user.member.nickname }}</h1>
+    <h1>Hi, {{ user.member.nickname }}! You have {{ user.member.rewards.count }} reward(s), and have accumulated $ {{ user.member.accumulated_spending }} toward the next reward.</h1>
     <h1><a href="/member/logout/">Log Out</a></h1>
 {% else %}
     <h1><a href="/member/signup/">Sign Up</a></h1>
     <h1><a href="/member/login/">Log In</a></h1>
 {% endif %}
+
+<h1>Featured Games</h1>
+{% for game in featured_games %}
+    <img src="{{ game.thumbnail.url }}" height="180" width="320">
+    <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
+    <h3>{{ game.description }}</h3>
+    <ul>
+        {% for item in game.items.all %}
+            <li>{{ item.get_platform_display }} - $ {{ item.price }}</li>
+        {% endfor %}
+    </ul>
+<p>{{ story.tease|truncatewords:"100" }}</p>
+{% endfor %}
 
 <h1><a href="/games/genres/">Genres</a></h1>
 
