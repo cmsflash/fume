@@ -13,6 +13,13 @@ class TagManager(models.Manager):
         if (order == 'Lexicographical'):
             tags.sort(key=lambda tag: tag.label)
         return tags
+    def get_games_by_tag(self, tag, order = 'Arbitrary'):
+    	tag_items = TagItem.objects.filter(tag = tag)
+    	games = set()
+    	for tag_item in tag_items:
+    		games.add(tag_item.game)
+    	games = list(games)
+    	return games
 
 class Tag(models.Model):
 

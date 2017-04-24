@@ -41,7 +41,7 @@
 			</h3>
 			<ul>
 				{% for tag in tags %}
-					<li class = "mui-btn mui-btn--primary mui-btn--raised tagli">{{ tag.label }}</li>
+					<li class = "tagli"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag.label %}">{{ tag.label }}</a></li>
 				{% endfor %}
 			</ul>
 		</div>
