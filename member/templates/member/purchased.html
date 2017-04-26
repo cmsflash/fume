@@ -1,0 +1,11 @@
+<h1 > Games previously purchased: </h1>
+{% if len < 1 %}
+	<h2>No purchase records yet.</h2>
+{% else %}
+	{% for game in games %}
+		<img src="{{ game.thumbnail.url }}" height="90" width="160">
+		<h2><a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
+		<h3>{{ game.description }}</h3>
+	{% endfor %}
+{% endif %}
+

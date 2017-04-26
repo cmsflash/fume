@@ -2,6 +2,7 @@ from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 
 from .views import signup
+from . import views
 
 urlpatterns = [
 	url(r'^signup/$', signup, name='signup'),
@@ -13,4 +14,5 @@ urlpatterns = [
 	url(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.password_reset_confirm, {'template_name': 'member/password_reset_confirm.html', 'post_reset_redirect': '/member/password_reset_complete/'}, name='password_reset_confirm'),
 	url(r'^password_reset_complete/$', auth_views.password_reset_complete,
 		{'template_name': 'member/password_reset_complete.html'}, name='password_reset_complete'),
+	url(r'^purchased/$', views.purchasedGames, name='purchased')
 ]
