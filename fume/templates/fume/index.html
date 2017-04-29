@@ -1,5 +1,13 @@
 {% if user.is_authenticated %}
-    <h1>Hi, {{ user.member.nickname }}! You have {{ user.member.rewards.count }} reward(s), and have accumulated $ {{ user.member.accumulated_spending }} toward the next reward.</h1>
+    <h1>Hi, {{ user.member.nickname }}! You have {{ user.member.get_rewards.count }} active reward(s), and have accumulated $ {{ user.member.accumulated_spending }} toward the next reward.</h1>
+    {% if user.member.get_rewards.count > 0 %}
+        <h2>Your Active Reward(s):</h2>
+        <ol>
+            {% for reward in user.member.get_rewards %}
+                <li>Expiration Date: {{ reward.expiration_date|date:"M d, Y" }}</li>
+            {% endfor %}
+        </ol>
+    {% endif %}
     <h1><a href="/member/logout/">Log Out</a></h1>
 {% else %}
     <h1><a href="/member/signup/">Sign Up</a></h1>
@@ -20,6 +28,7 @@
 {% endfor %}
 
 <h1><a href="/games/genres/">Genres</a></h1>
+<h1><a href="/member/purchased/">Games purchased</a></h1>
 
 {% if user.is_authenticated %}
     <h1>Recommendations</h1>

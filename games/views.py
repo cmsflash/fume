@@ -43,3 +43,5 @@ def tag(request, gameID):
 
 def add_tag(request, gameID):
         return HttpResponse("Adding tags to game #" + gameID)
+
+
