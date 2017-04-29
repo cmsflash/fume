@@ -1,3 +1,40 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="//cdn.muicss.com/mui-0.9.15/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="{% static "game.css" %}" rel = "stylesheet" type = "text/css"/>
+    <script src="//cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
+	  </head>
+	  <body>
+
+	  <header class="mui-appbar mui--z1">
+      <div class="mui-container">
+        <table width="100%">
+          <tr class="mui--appbar-height">
+            <td class="mui--text-title"><a style = “color:white;" href="/">FUME</a></td>
+            <td align="right">
+              <ul class="mui-list--inline mui--text-body2">
+                {% if user.is_authenticated %}
+
+                <li><a href="{% url 'member:logout' %}">Log Out</a></li>
+                <li><a href="{% url 'games:purchased' %}">Games purchased</a></li>
+                {% else %}
+                <li><a href="{% url 'member:signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'member:login' %}">Log In</a></li>
+                {% endif %}
+                <li><a href="{% url 'games:genres' %}">Genres</a></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </header>
+
 <h1 > Games previously purchased: </h1>
 {% if len < 1 %}
 	<h2>No purchase records yet.</h2>
@@ -8,4 +45,6 @@
 		<h3>{{ game.description }}</h3>
 	{% endfor %}
 {% endif %}
+
+</body>
 

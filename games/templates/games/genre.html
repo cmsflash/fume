@@ -11,6 +11,28 @@
     <script src="//cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
 	  </head>
 	  <body>
+	  <header class="mui-appbar mui--z1">
+      <div class="mui-container">
+        <table width="100%">
+          <tr class="mui--appbar-height">
+            <td class="mui--text-title"><a style = “color:white;" href="/">FUME</a></td>
+            <td align="right">
+              <ul class="mui-list--inline mui--text-body2">
+                {% if user.is_authenticated %}
+
+                <li><a href="{% url 'member:logout' %}">Log Out</a></li>
+                <li><a href="{% url 'games:purchased' %}">Games purchased</a></li>
+                {% else %}
+                <li><a href="{% url 'member:signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'member:login' %}">Log In</a></li>
+                {% endif %}
+                <li><a href="{% url 'games:genres' %}">Genres</a></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </header>
 	  <div class="mui-container">
 		  <div  class = "mui-panel">
 			<h1 style="text-transform: capitalize;">{{ genre }}</h1>
