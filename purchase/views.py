@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 def purchase(request, game_product_id):
     game_product = Item.objects.get(pk=game_product_id)
     member = request.user.member
-    purchase = Purchase(member, game_product)
     context = {'member':member.nickname, 'game_product': str(game_product), 'game_product_id':game_product_id, 'reward_count':min(member.get_number_of_rewards(), 10)}
     return render(request, 'purchase/purchase.html', context)
 
