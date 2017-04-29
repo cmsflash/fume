@@ -52,8 +52,10 @@
         </ul>
         </div>
         <div>
-        {% for tag_item in game.tag_items.all %}
-        <li class = "tagli" style = "display:inline"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag_item.tag.label %}">{{ tag_item.tag.label }}</a></li>
+        {% regroup game.tag_items.all|dictsort:'tag.label' by tag.label as tags %}
+        {% for tag in tags %}
+        <li class = "tagli" style = "display:inline">
+            <a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag.grouper %}">{{ tag.grouper }}</a></li>
         {% endfor %}
         </div>
     </div>
