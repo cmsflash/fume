@@ -31,6 +31,8 @@ class Game(models.Model):
 	def __str__(self):
 		return self.title
 
+	def get_tags(self):
+		return set([tagItems.tag for tagItems in self.tag_items.all()])
 
 class Item(models.Model):
 	LINUX = 'L'
