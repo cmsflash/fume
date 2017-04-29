@@ -13,7 +13,7 @@ class Review(models.Model):
     content = models.TextField(max_length = 1000)
     game = models.ForeignKey(Game, on_delete = models.CASCADE, related_name = 'game_of_review')
     reviewer = models.ForeignKey(Member, on_delete = models.CASCADE, related_name = 'reviewer_of_review')
-    date_published = models.DateField(default=date.today())
+    date_published = models.DateField()
     objects = ReviewManager()
     @classmethod
     def create(cls, content, game, reviewer, date):
