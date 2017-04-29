@@ -57,7 +57,7 @@
     <div class = "featured_games_div">
     {% for game in featured_games %}
     <div class = "featured_games_item mui-panel">
-        <img src="{{ game.thumbnail.url }}" height="180" width="320">
+        <img src="{{ game.cover.url }}" height="240" width="480">
         <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
         <h3>{{ game.description }}</h3>
         <ul>
