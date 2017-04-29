@@ -7,20 +7,24 @@ from .models import Game
 from reviews.models import Review
 
 def game(request, gameID):
+    
     game = Game.objects.get(pk=gameID)
-    if not request.user.is_authenticated():
-        return HttpResponse('Please log in or sign up first')
-    member = request.user.member
-    #member = Member.objects.get(pk=1)
     items = game.items.all()
     bought = []
     bought_any = False
-    for item in items:
-        if PurchaseRecord.objects.filter(member=member, item=item):
-            bought.append(True)
-            bought_any = True
-        else:
+    
+    if request.user.is_authenticated():
+        member = request.user.member
+        for item in items:
+            if PurchaseRecord.objects.filter(member=member, item=item):
+                bought.append(True)
+                bought_any = True
+            else:
+                bought.append(False)
+    else:
+        for item in items:
             bought.append(False)
+
     records = zip(bought, items)
     tags = Tag.objects.get_tags_of_game(game)
     tags = reversed(list(tags))
