@@ -10,7 +10,8 @@ def tag(request, game_id):
     tag_items = game.tag_items.all()
     tags = set()
     for tag_item in tag_items:
-        tags.add(tag_item.tag)
+        if tag_item.tag not in tags:
+            tags.add(tag_item.tag)
     context = {'member':member, 'game':game, 'tags':tags}
     return render(request, 'tags/tag.html', context)
 
@@ -31,7 +32,5 @@ def view_games_by_tag(request, label):
 
 def view_all_tags(request):
     tags = Tag.objects.all()
-    for tag in tags:
-        print(tag.label)
     context = {'tags':tags}
     return render(request, 'tags/tags.html', context)

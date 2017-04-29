@@ -40,20 +40,24 @@
 			<div class="mui-divider"></div><br>
 
     			{% for game in games %}
-            <div class = "featured_games_item mui-panel">
-                <img src="{{ game.thumbnail.url }}" height="180" width="320">
-                <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
-                <h3>{{ game.description }}</h3>
-                <ul>
-                    {% for item in game.items.all %}
-                        <li>{{ item.get_platform_display }} - $ {{ item.price }}</li>
-                    {% endfor %}
-                </ul>
-                {% for tag_item in game.tag_items.all %}
-                <li class = "tagli" style = "display:inline"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag_item.tag.label %}">{{ tag_item.tag.label }}</a></li>
-                {% endfor %}
-                </div>
+    <div class = "featured_games_item mui-panel">
+        <div style = "float:left">
+        <img src="{{ game.thumbnail.url }}" height="90" width="160">
+        <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
+        <h3>{{ game.description }}</h3>
+        <ul>
+            {% for item in game.items.all %}
+                <li>{{ item.get_platform_display }} - $ {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        </div>
+        <div>
+        {% for tag_item in game.tag_items.all %}
+        <li class = "tagli" style = "display:inline"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag_item.tag.label %}">{{ tag_item.tag.label }}</a></li>
         {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 			</div>
 		</div>
 	</div>

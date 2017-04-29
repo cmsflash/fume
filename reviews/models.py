@@ -4,8 +4,8 @@ from games.models import Game
 # Create your models here.
 class ReviewManager(models.Manager):
 	def get_reviews_of_game(self, game, order='Arbitrary'):
-		#review_list = Review.objects.filter(game = game)
-		review_list = Review.objects.all()
+		review_list = Review.objects.filter(game = game)
+        #review_list = Review.objects.all()
 		#reviews = set()
 		#for review in review_list:
 			#reviews.add((review.reviewer.nickname, review.content))
