@@ -12,7 +12,7 @@ class PurchaseRecord(models.Model):
 
     member = models.ForeignKey(Member, on_delete = models.CASCADE, related_name='purchase_records')
     item = models.ForeignKey(Item, on_delete = models.CASCADE, related_name='purchase_records')
-    number_of_rewards_applied = models.IntegerField(default=0)
+    number_of_rewards_applied = models.IntegerField()
     date_time = models.DateTimeField()
     objects = PurchaseManager()
     
