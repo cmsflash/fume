@@ -5,7 +5,7 @@ from games.models import Game
 class ReviewManager(models.Manager):
 
     def get_reviews_of_game(self, game, order='Arbitrary'):
-        review_list = Review.objects.filter(game = game)
+        review_list = Review.objects.filter(game=game)
         return review_list.reverse()
 
 class Review(models.Model):
