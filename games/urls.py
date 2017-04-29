@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^(?P<gameID>[0-9]+)/$', views.game, name='game'),
     url(r'^(?P<gameID>[0-9]+)/tag$', views.tag, name='tag'),
     url(r'^(?P<gameID>[0-9]+)/tag/add$', views.add_tag, name='add_tag'),
-    url(r'^genres/$', views.genres),
-    url(r'^genres/(?P<genre>\w+)/$', views.genre)
+    url(r'^genres/$', views.genres, name='genres'),
+    url(r'^genres/(?P<genre>\w+)/$', views.genre, name='genre')
 ]

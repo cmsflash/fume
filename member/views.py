@@ -24,7 +24,7 @@ def signup(request):
 		else:
 			return render(request, 'member/signup.html', {'form': form})
 
-def purchasedGames(request):
+def purchased_games(request):
     if not request.user.is_authenticated():
         return HttpResponse('Please log in or sign up first')
     member = request.user.member
