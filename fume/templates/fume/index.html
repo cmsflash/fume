@@ -14,7 +14,9 @@
     <h1><a href="/member/login/">Log In</a></h1>
 {% endif %}
 <h1><a href="/games/genres/">Genres</a></h1>
-<h1><a href="/member/purchased/">Games purchased</a></h1>
+{% if user.is_authenticated %}
+	<h1><a href="/member/purchased/">Games purchased</a></h1>
+{% endif %}
 <h1>Featured Games</h1>
 {% for game in featured_games %}
     <img src="{{ game.thumbnail.url }}" height="180" width="320">
