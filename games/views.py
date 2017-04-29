@@ -52,7 +52,7 @@ def add_tag(request, gameID):
 @login_required
 def purchased(request):
     member = request.user.member
-    PurchaseRecords = member.get_purchase_history().all()
+    PurchaseRecords = member.get_purchase_history().all().order_by('-date_time')
     games = []
     for record in PurchaseRecords:
         if record.item.game not in games:
