@@ -15,7 +15,7 @@
 {% endif %}
 <h1><a href="{% url 'games:genres' %}">Genres</a></h1>
 {% if user.is_authenticated %}
-	<h1><a href="{% url 'member:purchased' %}">Games purchased</a></h1>
+	<h1><a href="{% url 'games:purchased' %}">Games purchased</a></h1>
 {% endif %}
 <h1>Featured Games</h1>
 {% for game in featured_games %}

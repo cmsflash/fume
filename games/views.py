@@ -48,4 +48,15 @@ def tag(request, gameID):
 def add_tag(request, gameID):
         return HttpResponse("Adding tags to game #" + gameID)
 
+def purchased(request):
+    if not request.user.is_authenticated():
+        return HttpResponse('Please log in or sign up first')
+    member = request.user.member
+    PurchaseRecords = member.get_purchase_history().all()
+    games = []
+    for record in PurchaseRecords:
+        if record.item.game not in games:
+            games.append(record.item.game)
+    context = {'games': games, 'len': len(games)}
+    return render(request, 'member/purchased.html', context)
 
