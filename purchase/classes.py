@@ -6,9 +6,11 @@ class Purchase:
         self.member = member
         self.game_product = game_product
         self.price = game_product.get_price()
+        self.number_of_rewards = 0
 
     def update_price(number_of_rewards):
         if number_of_rewards <= self.member.get_number_of_rewards():
+            self.number_of_rewards = number_of_rewards
             self.price = self.game_product.get_price() * (1 - 0.1 * number_of_rewards)
         return self.price
 
@@ -17,7 +19,7 @@ class Purchase:
         return payment.pay(self.price)
 
     def record_purchase():
-        record = PurchaseRecord.create(self.member, self.game_product)
+        record = PurchaseRecord.create(self.member, self.game_product, number_of_rewards)
         record.save()
 
 class Payment:
