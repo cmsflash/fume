@@ -6,7 +6,7 @@ from member.models import Member
 
 def tag(request, game_id):
     game = Game.objects.get(pk=game_id)
-    member = Member.objects.get(pk=1)
+    member = request.user.member
     tag_items = game.tag_items.all()
     tags = set()
     for tag_item in tag_items:
@@ -16,7 +16,7 @@ def tag(request, game_id):
 
 def add(request, game_id):
     game = Game.objects.get(pk=game_id)
-    member = Member.objects.get(pk=1)
+    member = request.user.member
     label = request.GET.get('tag')
     tag = Tag.objects.get_or_create(label=label)[0]
     tag_item = TagItem.create(tag, member, game)
