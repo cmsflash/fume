@@ -35,10 +35,10 @@
       </div>
     </header>
 	  <div class="mui-container">
-	  <div class = "mui-panel game_div" style = "display:flex;flex-wrap:wrap;">
+	  <div class = "mui-panel">
 		
       {% for game in games %}
-    <div class = "featured_games_item mui-panel">
+    <div class = "mui-panel">
         <div style = "float:left">
         <img src="{{ game.thumbnail.url }}" height="90" width="160">
         <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
