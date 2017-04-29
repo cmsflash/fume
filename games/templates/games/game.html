@@ -17,7 +17,7 @@
         <table width="100%">
           <tr class="mui--appbar-height">
             <td class="mui--text-title"><a style = “color:white;" href="/">FUME</a></td>
-            <td align="right">
+            <td align="left">
               <ul class="mui-list--inline mui--text-body2">
                 {% if user.is_authenticated %}
 
@@ -28,6 +28,7 @@
                 <li><a href="{% url 'member:login' %}">Log In</a></li>
                 {% endif %}
                 <li><a href="{% url 'games:genres' %}">Genres</a></li>
+                <li><a href = "{% url 'tags:view_all_tags'%}">Tags</a></li>
               </ul>
             </td>
           </tr>

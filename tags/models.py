@@ -32,10 +32,11 @@ class Tag(models.Model):
 
 class TagItem(models.Model):
 
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='tag_items')
-    tagger = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='tag_items')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tagger = models.ForeignKey(Member, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='tag_items')
 
     @classmethod
     def create(cls, tag, tagger, game):
         return cls(tag=tag, tagger=tagger, game=game)
+

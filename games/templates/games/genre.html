@@ -16,7 +16,7 @@
         <table width="100%">
           <tr class="mui--appbar-height">
             <td class="mui--text-title"><a style = “color:white;" href="/">FUME</a></td>
-            <td align="right">
+            <td align="left">
               <ul class="mui-list--inline mui--text-body2">
                 {% if user.is_authenticated %}
 
@@ -27,6 +27,7 @@
                 <li><a href="{% url 'member:login' %}">Log In</a></li>
                 {% endif %}
                 <li><a href="{% url 'games:genres' %}">Genres</a></li>
+                <li><a href = "{% url 'tags:view_all_tags'%}">Tags</a></li>
               </ul>
             </td>
           </tr>
@@ -38,14 +39,21 @@
 			<h1 style="text-transform: capitalize;">{{ genre }}</h1>
 			<div class="mui-divider"></div><br>
 
-			<div class = "genre_game_div">
-			{% for game in games %}
-			<div class = "genre_game_item">
-			    <img src="{{ game.thumbnail.url }}" height="90" width="160">
-			    <h2><a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
-			    <h3>{{ game.description }}</h3>
-			</div>
-			{% endfor %}
+    			{% for game in games %}
+            <div class = "featured_games_item mui-panel">
+                <img src="{{ game.thumbnail.url }}" height="180" width="320">
+                <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
+                <h3>{{ game.description }}</h3>
+                <ul>
+                    {% for item in game.items.all %}
+                        <li>{{ item.get_platform_display }} - $ {{ item.price }}</li>
+                    {% endfor %}
+                </ul>
+                {% for tag_item in game.tag_items.all %}
+                <li class = "tagli" style = "display:inline"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag_item.tag.label %}">{{ tag_item.tag.label }}</a></li>
+                {% endfor %}
+                </div>
+        {% endfor %}
 			</div>
 		</div>
 	</div>

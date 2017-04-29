@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- load MUI -->
     <link href="//cdn.muicss.com/mui-0.9.15/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <link href="{% static "genre.css" %}" rel = "stylesheet" type = "text/css"/>
+    <link href="{% static "/tags/view_game.css" %}" rel = "stylesheet" type = "text/css"/>
     <script src="//cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
 	  </head>
 	  <body>
+
 	  <header class="mui-appbar mui--z1">
       <div class="mui-container">
         <table width="100%">
@@ -34,16 +35,12 @@
         </table>
       </div>
     </header>
-	  <div class="mui-container">
-	  <div  class = "mui-panel">
-			<h1>Genres</h1>
+    <div class = "mui-container">
+    <div class = "mui-panel">
+	{%for tag in tags%}
+		<li class = "tagli"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag.label %}">{{ tag.label }}</a></li>
+	{%endfor%}
+	</div>
 
-			<ul>
-			    {% for genre in genres %}
-			    <div class="mui-divider"></div><br>
-			        <li><a href="{{ genre }}" style="text-transform: capitalize;">{{ genre }}</a></li>
-			    {% endfor %}
-			</ul>
-		</div>
-		</div>
 	</body>
+	</html>

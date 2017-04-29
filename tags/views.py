@@ -28,3 +28,10 @@ def view_games_by_tag(request, label):
     games = Tag.objects.get_games_by_tag(tag)
     context = {'games': games}
     return render(request, 'tags/view_games_by_tag.html', context)
+
+def view_all_tags(request):
+    tags = Tag.objects.all()
+    for tag in tags:
+        print(tag.label)
+    context = {'tags':tags}
+    return render(request, 'tags/tags.html', context)
