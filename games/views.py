@@ -5,6 +5,7 @@ from member.models import Member
 from tags.models import Tag
 from .models import Game
 from reviews.models import Review
+from django.contrib.auth.decorators import login_required
 
 def game(request, gameID):
     
@@ -48,9 +49,8 @@ def tag(request, gameID):
 def add_tag(request, gameID):
         return HttpResponse("Adding tags to game #" + gameID)
 
+@login_required
 def purchased(request):
-    if not request.user.is_authenticated():
-        return HttpResponse('Please log in or sign up first')
     member = request.user.member
     PurchaseRecords = member.get_purchase_history().all()
     games = []
