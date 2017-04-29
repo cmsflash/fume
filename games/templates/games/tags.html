@@ -11,6 +11,7 @@
     <script src="//cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
 	  </head>
 	  <body>
+
 	  <header class="mui-appbar mui--z1">
       <div class="mui-container">
         <table width="100%">
@@ -34,24 +35,12 @@
         </table>
       </div>
     </header>
-	  <div class="mui-container">
-	  <div class = "mui-panel game_div" style = "display:flex;flex-wrap:wrap;">
-		
-      {% for game in games %}
-    <div class = "featured_games_item mui-panel">
-        <img src="{{ game.thumbnail.url }}" height="180" width="320">
-        <h2><b>{{ game.get_genre_display }}</b> <a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
-        <h3>{{ game.description }}</h3>
-        <ul>
-            {% for item in game.items.all %}
-                <li>{{ item.get_platform_display }} - $ {{ item.price }}</li>
-            {% endfor %}
-        </ul>
-        {% for tag_item in game.tag_items.all %}
-			<li class = "tagli" style = "display:inline"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag_item.tag.label %}">{{ tag_item.tag.label }}</a></li>
-        {% endfor %}
-        </div>
-    {% endfor %}
-		</div>
+    <div class = "mui-container">
+    <div class = "mui-panel">
+	{%for tag in tags%}
+		<li class = "tagli"><a class="tagButton purchaseButton mui-btn mui-btn--primary mui-btn--raised" href="{% url 'tags:view_games_by_tag' tag.label %}">{{ tag.label }}</a></li>
+	{%endfor%}
 	</div>
+
 	</body>
+	</html>
