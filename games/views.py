@@ -39,7 +39,7 @@ def genres(request):
     return render(request, 'games/genres.html', context)
 
 def genre(request, genre):
-    games = Game.objects.filter(genre=genre[:2].upper())
+    games = Game.objects.filter(genre=genre[:2].upper()).order_by('-date_published')
     context = {'genre': genre, 'games': games}
     return render(request, 'games/genre.html', context)
 
