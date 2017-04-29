@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+from django.core.mail import send_mail
 
 class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='member')
@@ -29,9 +30,20 @@ class Member(models.Model):
 
     def accumulate_spending(self, amount):
         self.accumulated_spending += amount
+        numberOfNewRewards = 0
         while self.accumulated_spending >= Reward.THRESHOLD:
+            numberOfNewRewards += 1
             Reward.create(member=self, date=datetime.datetime.now() + datetime.timedelta(days=120))
             self.accumulated_spending -= Reward.THRESHOLD
+
+        if numberOfNewRewards > 0:
+            send_mail(
+                'New Rewards',
+                'You got {} new rewards.'.format(numberOfNewRewards),
+                'noreply@fume.com',
+                [self.user.email],
+                fail_silently=False,
+            )
 
     def get_purchase_history(self):
         return self.purchase_records
