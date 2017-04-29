@@ -8,10 +8,7 @@ def tag(request, game_id):
     game = Game.objects.get(pk=game_id)
     member = request.user.member
     tag_items = game.tag_items.all()
-    tags = set()
-    for tag_item in tag_items:
-        if tag_item.tag not in tags:
-            tags.add(tag_item.tag)
+    tags = Tag.objects.get_tags_of_game(game)
     context = {'member':member, 'game':game, 'tags':tags}
     return render(request, 'tags/tag.html', context)
 
