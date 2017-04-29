@@ -36,9 +36,9 @@ def pay(request, game_product_id):
 
 @login_required
 def clear(request, game_id):
-    game = Game.objects.get(pk=game_id)
-    items = game.items.filter(member=member)
     member = request.user.member
+    game = Game.objects.get(pk=game_id)
+    items = game.items.all()
     for item in items:
-        item.purchase_records.all().delete()
+        item.purchase_records.filter(member=member).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

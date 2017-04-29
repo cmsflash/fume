@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^games/', include('games.urls', namespace='games')),
     url(r'^purchase/', include('purchase.urls', namespace='purchase')),
     url(r'^member/', include('member.urls', namespace='member')),
+    url(r'^accounts/', include('member.urls', namespace='member')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^reviews/', include('reviews.urls', namespace = 'reviews')),
 ]

@@ -48,7 +48,7 @@ def tag(request, gameID):
 
 def add_tag(request, gameID):
         return HttpResponse("Adding tags to game #" + gameID)
-
+        
 @login_required
 def purchased(request):
     member = request.user.member
