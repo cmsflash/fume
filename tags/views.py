@@ -25,7 +25,7 @@ def add(request, game_id):
     return redirect('games:game', gameID=game_id)
 
 def view_games_by_tag(request, label):
-    tag = Tag.objects.get(label = label)
+    tag = Tag.objects.get(label=label)
     games = Tag.objects.get_games_by_tag(tag)
     context = {'games': games}
     return render(request, 'tags/view_games_by_tag.html', context)

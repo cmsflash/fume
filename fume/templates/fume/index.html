@@ -37,7 +37,7 @@
     <div class="mui-container">
     <div  class = "mui-panel">
         {% if user.is_authenticated %}
-            <h1>Hi, {{ user.member.nickname }}! You have {{ user.member.get_rewards.count }} active reward(s), and have accumulated $ {{ user.member.accumulated_spending }} toward the next reward.</h1>
+            <h1>Hi, {{ user.member.nickname }}! You have {{ user.member.get_rewards.count }} active reward(s). You are only ${{ spending_needed }} away from the next reward!</h1>
             {% if user.member.get_rewards.count > 0 %}
                 <h2>Your Active Reward(s):</h2>
                 <ol>
