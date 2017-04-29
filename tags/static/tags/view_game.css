@@ -1,0 +1,7 @@
+.game_div{
+	display:flex;
+	flex-wrap: wrap;
+}
+.game_item{
+	flex:1;
+}

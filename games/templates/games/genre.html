@@ -1,7 +1,30 @@
-<h1 style="text-transform: capitalize;">{{ genre }}</h1>
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="//cdn.muicss.com/mui-0.9.15/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="{% static "genre.css" %}" rel = "stylesheet" type = "text/css"/>
+    <script src="//cdn.muicss.com/mui-0.9.15/js/mui.min.js"></script>
+	  </head>
+	  <body>
+	  <div class="mui-container">
+		  <div  class = "mui-panel">
+			<h1 style="text-transform: capitalize;">{{ genre }}</h1>
+			<div class="mui-divider"></div><br>
 
-{% for game in games %}
-    <img src="{{ game.thumbnail.url }}" height="90" width="160">
-    <h2><a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
-    <h3>{{ game.description }}</h3>
-{% endfor %}
+			<div class = "genre_game_div">
+			{% for game in games %}
+			<div class = "genre_game_item">
+			    <img src="{{ game.thumbnail.url }}" height="90" width="160">
+			    <h2><a href="{% url 'games:game' game.id %}">{{ game.title }}</a></h2>
+			    <h3>{{ game.description }}</h3>
+			</div>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+	</body>

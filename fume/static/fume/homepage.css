@@ -1,0 +1,7 @@
+.featured_games_div{
+	display:flex;
+	flex-wrap: wrap;
+}
+.featured_games_item{
+	flex:1;
+}

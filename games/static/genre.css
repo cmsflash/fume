@@ -1,0 +1,7 @@
+.genre_game_div{
+	display:flex;
+	flex-wrap: wrap;
+}
+.genre_game_item{
+	flex:1;
+}

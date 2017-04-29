@@ -1,0 +1,9 @@
+.featured_games_div{
+	width:220px;
+	height:300px;
+	border:1px solid black;
+	display:flex;
+}
+.featured_games_item{
+	flex:1;
+}
