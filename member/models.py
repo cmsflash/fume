@@ -17,7 +17,7 @@ class Member(models.Model):
         return self.rewards.filter(expiration_date__gte=datetime.datetime.now()).count()
 
     def get_payment_method(self):
-                return self.payment_method
+        return self.payment_method
 
     def get_rewards(self):
         return self.rewards.filter(expiration_date__gte=datetime.datetime.now()).order_by('expiration_date')
@@ -29,7 +29,8 @@ class Member(models.Model):
             reward.delete()
 
     def accumulate_spending(self, amount):
-        self.accumulated_spending += amount
+        self.accumulated_spending = self.accumulated_spending + amount
+        print(self.accumulated_spending)
         numberOfNewRewards = 0
         while self.accumulated_spending >= Reward.THRESHOLD:
             numberOfNewRewards += 1
@@ -44,6 +45,8 @@ class Member(models.Model):
                 [self.user.email],
                 fail_silently=False,
             )
+
+        self.save()
 
     def get_purchase_history(self):
         return self.purchase_records

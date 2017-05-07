@@ -16,6 +16,6 @@ class Review(models.Model):
     date_published = models.DateField()
     objects = ReviewManager()
     @classmethod
-    def create(cls, content, game, reviewer, date):
-        return cls(content = content, game = game, reviewer = reviewer, date_published=date)
+    def create(cls, content, game, reviewer):
+        return cls(content=content, game=game, reviewer=reviewer, date_published=date.today())
 

@@ -54,7 +54,7 @@ class Item(models.Model):
 	)
 	platform = models.CharField(max_length=5, choices=PLATFORMS)
 	game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='items')
-	price = models.DecimalField(max_digits=5, decimal_places=2)
+	price = models.DecimalField(max_digits=10, decimal_places=2)
 
 	def get_price(self):
 		return self.price
