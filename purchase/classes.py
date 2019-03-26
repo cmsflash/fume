@@ -25,13 +25,13 @@ class Purchase:
             self.record_purchase()
             self.member.use_rewards(self.number_of_rewards)
             self.member.accumulate_spending(self.price)
-            send_mail('Receipt of your purchase on Fume',
+            '''send_mail('Receipt of your purchase on Fume',
                       'Dear ' + self.member.nickname + ',\n\n'
                       + 'Thank you for purchasing on Fume. You have purchased the game '
                       + self.item.game.title + '.' + 'This is your receipt.\n\n'
                       + 'Best,\nFume',
                       'noreply@fume.com',
-                      [self.member.user.email])
+                      [self.member.user.email])'''
         return successful
 
     def record_purchase(self):

@@ -14,7 +14,7 @@ def game(request, gameID):
     bought = []
     bought_any = False
     
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         member = request.user.member
         for item in items:
             if PurchaseRecord.objects.filter(member=member, item=item):
