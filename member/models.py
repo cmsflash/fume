@@ -38,13 +38,13 @@ class Member(models.Model):
             self.accumulated_spending -= Reward.THRESHOLD
 
         if numberOfNewRewards > 0:
-            '''send_mail(
+            send_mail(
                 'New Rewards',
                 'You got {} new rewards.'.format(numberOfNewRewards),
                 'noreply@fume.com',
                 [self.user.email],
-                fail_silently=False,
-            )'''
+                fail_silently=True,
+            )
 
         self.save()
 
