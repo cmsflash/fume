@@ -13,10 +13,12 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 import django_heroku
+import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATABASE_URL = 'postgres://bndjqkwpgsdqkn:25676f5cec686408967d547ea98301a9e9c4b095ae620b778d5dd1859a97e974@ec2-54-197-232-203.compute-1.amazonaws.com:5432/d34n03mguathc7'
 
 
 # Quick-start development settings - unsuitable for production
@@ -87,10 +89,9 @@ WSGI_APPLICATION = 'fume.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default=DATABASE_URL, conn_max_age=600, ssl_require=True
+    ),
 }
 
 
