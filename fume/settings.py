@@ -28,7 +28,7 @@ DATABASE_URL = 'postgres://bndjqkwpgsdqkn:25676f5cec686408967d547ea98301a9e9c4b0
 SECRET_KEY = 'ub_!@-$8+ixwo%0jlwhz*gh2lpr8hdy415-plw+yf^o!juqikd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
