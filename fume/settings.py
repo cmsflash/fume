@@ -14,18 +14,18 @@ import os
 
 import django_heroku
 import dj_database_url
+from decouple import config
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATABASE_URL = 'postgres://bndjqkwpgsdqkn:25676f5cec686408967d547ea98301a9e9c4b095ae620b778d5dd1859a97e974@ec2-54-197-232-203.compute-1.amazonaws.com:5432/d34n03mguathc7'
-
+DATABASE_URL = config('DATABASE_URL')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ub_!@-$8+ixwo%0jlwhz*gh2lpr8hdy415-plw+yf^o!juqikd'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
