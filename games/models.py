@@ -36,6 +36,7 @@ class Game(models.Model):
 	def get_tags(self):
 		return set([tagItems.tag for tagItems in self.tag_items.all()])
 
+
 class Item(models.Model):
 	LINUX = 'L'
 	MACOS = 'M'
@@ -66,6 +67,7 @@ class Item(models.Model):
 
 	class Meta:
 		unique_together = ["game", "platform"]
+
 
 class FeaturedGame(models.Model):
 	game = models.ForeignKey(Game, on_delete=models.CASCADE)

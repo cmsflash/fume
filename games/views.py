@@ -37,12 +37,14 @@ def game(request, gameID):
     }
     return render(request, 'games/game.html', context)
 
+
 def genres(request):
     genres = [
         choice[1].lower() for choice in Game._meta.get_field('genre').choices
     ]
     context = {'genres': genres}
     return render(request, 'games/genres.html', context)
+
 
 def genre(request, genre):
     games = Game.objects.filter(genre=genre[:2].upper()).order_by(
@@ -51,12 +53,15 @@ def genre(request, genre):
     context = {'genre': genre, 'games': games}
     return render(request, 'games/genre.html', context)
 
+
 def tag(request, gameID):
         return HttpResponse("Tags of game #" + gameID)
 
+
 def add_tag(request, gameID):
         return HttpResponse("Adding tags to game #" + gameID)
-        
+
+
 @login_required
 def purchased(request):
     member = request.user.member
@@ -69,4 +74,3 @@ def purchased(request):
             games.append(record.item.game)
     context = {'games': games, 'len': len(games)}
     return render(request, 'member/purchased.html', context)
-
