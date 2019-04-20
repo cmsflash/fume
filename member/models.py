@@ -1,7 +1,9 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
-import datetime
 from django.core.mail import send_mail
+
 
 class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='member')
@@ -54,6 +56,7 @@ class Member(models.Model):
     def __str__(self):
         return self.nickname
 
+
 class PaymentMethod(models.Model):
     account_number = models.IntegerField()
     member = models.OneToOneField(Member, on_delete = models.CASCADE, related_name='payment_method')
@@ -68,12 +71,13 @@ class PaymentMethod(models.Model):
     def __str__(self):
         return self.member.nickname
 
-class Reward(models.Model):
 
+class Reward(models.Model):
     THRESHOLD = 100
 
     expiration_date = models.DateTimeField()
     member = models.ForeignKey(Member, on_delete = models.CASCADE, related_name='rewards')
+
     @classmethod
     def create(cls, member, date):
         return cls.objects.create(member=member, expiration_date=date)

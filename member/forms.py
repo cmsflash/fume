@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+
 class SignupForm(forms.Form):
 	username = forms.CharField()
 	password = forms.CharField(widget=forms.PasswordInput)
@@ -19,3 +20,4 @@ class SignupForm(forms.Form):
 		if User.objects.filter(email=email).exists():
 			raise ValidationError("Email used")
 		return email
+		
