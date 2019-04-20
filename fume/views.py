@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from member.models import Member
 from games.models import FeaturedGame
 from recommendation.classes import Recommender
