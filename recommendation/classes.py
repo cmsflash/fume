@@ -2,19 +2,20 @@ from purchase.models import PurchaseRecord
 from tags.models import Tag
 from games.models import Game
 
+
 class Recommender(object):
 
     @staticmethod
     def make_recommendations(member):
+        purchase_records = PurchaseRecord.objects.get_purchase_records_of(
+            member
+        )
         
-        purchase_records = PurchaseRecord.objects.get_purchase_records_of(member)
         purchased_games = set()
-
         for purchase_record in purchase_records:
             purchased_games.add(purchase_record.item.game)
 
         recommendations = set()
-        
         for i in range(min(len(purchase_records), 3)):
             purchase_record = purchase_records[i]
             reference_game = purchase_record.item.game
