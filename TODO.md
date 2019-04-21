@@ -1,4 +1,0 @@
-- Make runnable
-- Clean up cahce files
-- Fix code style
-- Deploy
