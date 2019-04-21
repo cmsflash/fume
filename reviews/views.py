@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Review
 from django.http import HttpResponse
+
+from .models import Review
 from games.models import Game
 from member.models import Member
 
