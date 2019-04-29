@@ -18,8 +18,10 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 
 # Application
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = [
+    'fumebyqomo.herokuapp.com',
+]
 
 INSTALLED_APPS = [
     'fume',
