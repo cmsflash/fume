@@ -119,7 +119,7 @@ STATICFILES_STORAGE = config('STATICFILES_STORAGE')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
 
 # Login
 LOGIN_REDIRECT_URL = '/'
