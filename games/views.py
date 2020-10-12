@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from purchase.models import PurchaseRecord
 from member.models import Member
+from purchase.models import PurchaseRecord
+from reviews.models import Review
 from tags.models import Tag
 from .models import Game
-from reviews.models import Review
 
 
-def game(request, gameID):
+def game(request: HttpRequest, gameID: None) -> HttpResponse:
     game = Game.objects.get(pk=gameID)
     items = game.items.all()
     bought = []
@@ -38,7 +38,7 @@ def game(request, gameID):
     return render(request, 'games/game.html', context)
 
 
-def genres(request):
+def genres(request: HttpRequest) -> HttpResponse:
     genres = [
         choice[1].lower() for choice in Game._meta.get_field('genre').choices
     ]
@@ -46,28 +46,26 @@ def genres(request):
     return render(request, 'games/genres.html', context)
 
 
-def genre(request, genre):
+def genre(request: HttpRequest, genre: str) -> HttpResponse:
     games = Game.objects.filter(genre=genre[:2].upper()).order_by(
-        '-date_published'
-    )
+        '-date_published')
     context = {'genre': genre, 'games': games}
     return render(request, 'games/genre.html', context)
 
 
-def tag(request, gameID):
-        return HttpResponse("Tags of game #" + gameID)
+def tag(request: HttpRequest, gameID: str) -> HttpResponse:
+    return HttpResponse("Tags of game #" + gameID)
 
 
-def add_tag(request, gameID):
-        return HttpResponse("Adding tags to game #" + gameID)
+def add_tag(request: HttpRequest, gameID: str) -> HttpResponse:
+    return HttpResponse("Adding tags to game #" + gameID)
 
 
 @login_required
-def purchased(request):
+def purchased(request: HttpRequest) -> HttpResponse:
     member = request.user.member
     PurchaseRecords = member.get_purchase_history().all().order_by(
-        '-date_time'
-    )
+        '-date_time')
     games = []
     for record in PurchaseRecords:
         if record.item.game not in games:

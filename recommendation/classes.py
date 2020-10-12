@@ -1,15 +1,17 @@
+from typing import List
+
+from games.models import Game
+from member.models import Member
 from purchase.models import PurchaseRecord
 from tags.models import Tag
-from games.models import Game
 
 
 class Recommender(object):
 
     @staticmethod
-    def make_recommendations(member):
+    def make_recommendations(member: Member) -> List[Game]:
         purchase_records = PurchaseRecord.objects.get_purchase_records_of(
-            member
-        )
+            member)
         
         purchased_games = set()
         for purchase_record in purchase_records:

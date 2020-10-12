@@ -1,12 +1,15 @@
+from typing import List, Union
+
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.urls.resolvers import URLPattern, URLResolver
 
 from . import views
 
 
-urlpatterns = [
+urlpatterns: List[Union[URLPattern, URLResolver]] = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
     url(r'^tags/', include(('tags.urls', 'tags'), namespace='tags')),

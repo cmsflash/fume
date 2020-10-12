@@ -1,11 +1,12 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from member.models import Member
 from games.models import FeaturedGame
+from member.models import Member
 from recommendation.classes import Recommender
 
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     featured_games = [
         featured_game.game for featured_game in FeaturedGame.objects.all()
     ]
