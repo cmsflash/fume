@@ -1,6 +1,5 @@
 import os
 
-import django_heroku
 import dj_database_url
 from decouple import config
 
@@ -157,6 +156,3 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id,name,email',
 }
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
-# Heroku
-django_heroku.settings(locals())
