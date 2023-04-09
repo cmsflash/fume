@@ -1,6 +1,6 @@
 from typing import List, Union
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.urls.resolvers import URLPattern, URLResolver
 
 from .models import Game
@@ -12,10 +12,10 @@ genres: str = '|'.join(
 )
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
-    url(r'^(?P<gameID>[0-9]+)/$', views.game, name='game'),
-    url(r'^(?P<gameID>[0-9]+)/tag$', views.tag, name='tag'),
-    url(r'^(?P<gameID>[0-9]+)/tag/add$', views.add_tag, name='add_tag'),
-    url(r'^genres/$', views.genres, name='genres'),
-    url(r'^genres/(?P<genre>\w+)/$', views.genre, name='genre'),
-    url(r'^purchased/$', views.purchased, name='purchased')
+    re_path(r'^(?P<gameID>[0-9]+)/$', views.game, name='game'),
+    re_path(r'^(?P<gameID>[0-9]+)/tag$', views.tag, name='tag'),
+    re_path(r'^(?P<gameID>[0-9]+)/tag/add$', views.add_tag, name='add_tag'),
+    re_path(r'^genres/$', views.genres, name='genres'),
+    re_path(r'^genres/(?P<genre>\w+)/$', views.genre, name='genre'),
+    re_path(r'^purchased/$', views.purchased, name='purchased')
 ]
